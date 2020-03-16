@@ -37,15 +37,18 @@
           <el-button class="loginbnt" type="primary" @click="onSubmit">登录</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button class="loginbnt" type="primary">注册</el-button>
+          <el-button class="loginbnt" type="primary" @click="openregister">注册</el-button>
         </el-form-item>
       </el-form>
     </div>
     <img class="rightimg" src="../../assets/login_banner_ele.png" alt="">
+    <register ref="register" />
   </div>
 </template>
 
 <script>
+// 导入注册组件
+import register from './components/register.vue'
 export default {
   data() {
     return {
@@ -82,7 +85,7 @@ export default {
   },
   methods: {
     // 点击登录按钮时触发
-    onSubmit () {
+    onSubmit() {
       // 调用 form 的验证方法
       this.$refs.form.validate(valid => {
         // valid 就是验证后返回的数据
@@ -97,7 +100,16 @@ export default {
           this.$message.error('验证不通过')
         }
       })
+    },
+    // 打开注册面板
+    openregister () {
+      // 使用 $refs 传参的方式将注册组件中的属性进行修改
+      this.$refs.register.dialogFormVisible = true
     }
+  },
+  // 注册组件
+  components: {
+    register
   }
 }
 </script>
